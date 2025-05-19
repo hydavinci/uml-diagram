@@ -1,0 +1,7 @@
+name: region-weather
+version: 1.0.0
+description: Weather MCP Server for providing weather information via Model Context Protocol
+
+start:
+  command: ["python", "server.py"]
+  port: 8000

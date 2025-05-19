@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+.env
+
+# Logs
+*.log
+logs/
+weather_mcp_server.log
+
+# Docker
+.dockerignore
+
+# VS Code
+.vscode/
+.vs/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Smithery specific
+.smithery/
+smithery-debug/
+
+# Local test files
+test*.py
+*test.py
