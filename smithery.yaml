@@ -7,7 +7,6 @@ startCommand:
     type: object
     description: Empty config, no options
   commandFunction:
-    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
     |-
     (config) => ({ command: 'python', args: ['server.py'] })
   exampleConfig: {}
