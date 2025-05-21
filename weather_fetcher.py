@@ -1,9 +1,8 @@
 import requests
 import json
 
-# Define city name
+# Define city name for direct script execution
 CITY_NAME = "Suzhou"
-
 
 def get_weather_internal(region_name):
     """
@@ -16,20 +15,19 @@ def get_weather_internal(region_name):
     Returns:
         dict: A dictionary containing weather information
     """
+    if not region_name:
+        return {"error": "Region name cannot be empty"}
+        
     try:
-        # Using wttr.in API, a free service that doesn't require an API key
         url = f"https://wttr.in/{region_name}?format=j1"
-        response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
-
-        if response.status_code != 200:
-            return {"error": f"Failed to fetch weather data: HTTP {response.status_code}"}
-
-        weather_data = response.json()
-
-        # Return the raw weather data directly
-        return weather_data
-
-    except Exception as e:
+        response = requests.get(
+            url, 
+            headers={"User-Agent": "Mozilla/5.0"}, 
+            timeout=5
+        )
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
         return {"error": f"Failed to fetch weather data: {str(e)}"}
 
 
