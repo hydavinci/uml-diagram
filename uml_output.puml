@@ -1,0 +1,323 @@
+@startuml
+class BlockingDataTypeStore {
+}
+DataTypeStoreBase <|-- BlockingDataTypeStore
+class LevelDbMetadataChangeList {
+    - std::string metadata_prefix_;
+    - std::string global_metadata_key_;
+}
+MetadataChangeList <|-- LevelDbMetadataChangeList
+class LevelDbWriteBatch {
+    + return type_;
+    - DataType type_;
+    - std::string data_prefix_;
+    - LevelDbMetadataChangeList metadata_change_list_;
+}
+BlockingDataTypeStoreImpl::WriteBatch <|-- LevelDbWriteBatch
+class BlockingDataTypeStoreImpl {
+    + data migrations;
+    - DataType data_type_;
+    - StorageType storage_type_;
+    - std::string data_prefix_;
+    - std::string metadata_prefix_;
+    - std::string global_metadata_key_;
+}
+BlockingDataTypeStore <|-- BlockingDataTypeStoreImpl
+class SyncMetadataConsistency {
+}
+class ClientTagBasedDataTypeProcessor {
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+}
+DataTypeProcessor <|-- ClientTagBasedDataTypeProcessor
+DataTypeLocalChangeProcessor <|-- ClientTagBasedDataTypeProcessor
+DataTypeControllerDelegate <|-- ClientTagBasedDataTypeProcessor
+class ErrorSite {
+}
+class TestDataTypeSyncBridge {
+    + return trimmed_specifics;
+    + return merge_call_count_;
+    + return apply_call_count_;
+    + return commit_failures_count_;
+    + return sync_started_;
+    + return supports_incremental_updates_;
+    + return commit_attempt_failed_behaviour_;
+    - bool supports_incremental_updates_;
+}
+FakeDataTypeSyncBridge <|-- TestDataTypeSyncBridge
+class ClientTagBasedDataTypeProcessorTest {
+    + DataTypeActivationRequest request;
+    + return specifics;
+    + return PREFERENCES;
+    + return true;
+    + return specifics;
+    + return 0;
+    + sync_pb::DataTypeState::Invalidation inv;
+    + return inv;
+    # return error_reported_;
+    - base::test::SingleThreadTaskEnvironment task_environment_;
+}
+::testing::Test <|-- ClientTagBasedDataTypeProcessorTest
+class FullUpdateClientTagBasedDataTypeProcessorTest {
+    # return false;
+}
+ClientTagBasedDataTypeProcessorTest <|-- FullUpdateClientTagBasedDataTypeProcessorTest
+class CommitOnlyClientTagBasedDataTypeProcessorTest {
+    # return USER_EVENTS;
+}
+ClientTagBasedDataTypeProcessorTest <|-- CommitOnlyClientTagBasedDataTypeProcessorTest
+class PasswordsClientTagBasedDataTypeProcessorTest {
+    # return PASSWORDS;
+}
+ClientTagBasedDataTypeProcessorTest <|-- PasswordsClientTagBasedDataTypeProcessorTest
+class ClientTagBasedDataTypeProcessorWithUniquePositionTest {
+    # return SHARED_TAB_GROUP_DATA;
+}
+ClientTagBasedDataTypeProcessorTest <|-- ClientTagBasedDataTypeProcessorWithUniquePositionTest
+class ClientTagBasedRemoteUpdateHandler {
+    - DataType type_;
+}
+class ClientTagBasedRemoteUpdateHandlerTest {
+    + UpdateResponseDataList updates;
+    + return entity_data;
+    - ProcessorEntityTracker processor_entity_tracker_;
+    - FakeDataTypeSyncBridge data_type_sync_bridge_;
+    - ClientTagBasedRemoteUpdateHandler remote_update_handler_;
+}
+::testing::Test <|-- ClientTagBasedRemoteUpdateHandlerTest
+class ClientTagBasedRemoteUpdateHandlerForSharedTest {
+    + sync_pb::GarbageCollectionDirective gc_directive;
+}
+ClientTagBasedRemoteUpdateHandlerTest <|-- ClientTagBasedRemoteUpdateHandlerForSharedTest
+class ConflictResolution {
+}
+class DataBatch {
+}
+class DataTypeActivationRequest {
+    + ModelErrorHandler error_handler;
+    + GaiaId authenticated_gaia_id;
+    + std::string cache_guid;
+    + base::Time configuration_start_time;
+}
+class DataTypeControllerDelegate {
+    + any time;
+}
+class DataTypeLocalChangeProcessor {
+    + various events;
+}
+class DataTypeStore {
+}
+DataTypeStoreBase <|-- DataTypeStore
+class DataTypeStoreBackend {
+    + int64_t kLatestSchemaVersion;
+    - delete ptr;
+}
+base::RefCountedThreadSafe <|-- DataTypeStoreBackend
+class base {
+    - delete ptr;
+}
+sequence <|-- base
+task <|-- base
+tasks <|-- base
+CustomOnTaskRunnerDeleter <|-- base
+class DataTypeStoreBackendTest {
+    # base::test::SingleThreadTaskEnvironment task_environment_;
+}
+testing::Test <|-- DataTypeStoreBackendTest
+class DataTypeStoreBase {
+    + std::string id;
+    + std::string value;
+}
+class Record {
+    + std::string id;
+    + std::string value;
+}
+class WriteBatch {
+}
+class DataTypeStoreImpl {
+    - DataType data_type_;
+    - StorageType storage_type_;
+}
+DataTypeStore <|-- DataTypeStoreImpl
+class DataTypeStoreImplTest {
+    - base::test::SingleThreadTaskEnvironment task_environment_;
+}
+testing::TestWithParam <|-- DataTypeStoreImplTest
+class DataTypeStoreService {
+}
+KeyedService <|-- DataTypeStoreService
+class DataTypeStoreServiceImpl {
+    + const override;
+    - base::FilePath sync_path_;
+    - base::FilePath leveldb_path_;
+}
+DataTypeStoreService <|-- DataTypeStoreServiceImpl
+class DataTypeStoreServiceImplTest {
+    # base::test::TaskEnvironment task_environment_;
+    # TestingPrefServiceSimple pref_service_;
+}
+testing::Test <|-- DataTypeStoreServiceImplTest
+class DataTypeStoreWithInMemoryCache {
+}
+class WriteBatch {
+}
+class WriteBatchImpl {
+}
+WriteBatch <|-- WriteBatchImpl
+class DataTypeStoreWithInMemoryCacheTest {
+    - base::test::TaskEnvironment task_environment_;
+}
+::testing::Test <|-- DataTypeStoreWithInMemoryCacheTest
+class DataTypeSyncBridge {
+}
+class CommitAttemptFailedBehavior {
+}
+class DataTypeSyncBridgeTest {
+    - StubDataTypeSyncBridge bridge_;
+}
+::testing::Test <|-- DataTypeSyncBridgeTest
+class EmptyMetadataChangeList {
+}
+MetadataChangeList <|-- EmptyMetadataChangeList
+class EntityChange {
+}
+class ForwardingDataTypeControllerDelegate {
+    + const override;
+}
+DataTypeControllerDelegate <|-- ForwardingDataTypeControllerDelegate
+class InMemoryMetadataChangeList {
+}
+MetadataChangeList <|-- InMemoryMetadataChangeList
+class MetadataChange {
+    + ChangeType type;
+    + sync_pb::EntityMetadata metadata;
+}
+class DataTypeStateChange {
+    + ChangeType type;
+    + sync_pb::DataTypeState state;
+}
+class MockMetadataChangeList {
+}
+MetadataChangeList <|-- MockMetadataChangeList
+class MetadataBatch {
+    - EntityMetadataMap metadata_map_;
+    - sync_pb::DataTypeState state_;
+}
+class MetadataChangeList {
+}
+class ModelError {
+    - base::Location location_;
+    - std::string message_;
+}
+class MutableDataBatch {
+    + const override;
+}
+DataBatch <|-- MutableDataBatch
+class ProcessorEntity {
+    + return storage_key_;
+    + return metadata_;
+    - std::string storage_key_;
+    - sync_pb::EntityMetadata metadata_;
+    - int64_t commit_requested_sequence_number_;
+}
+class ProcessorEntityTracker {
+    + return data_type_state_;
+    - sync_pb::DataTypeState data_type_state_;
+}
+class ProcessorEntityTrackerTest {
+    # ProcessorEntityTracker entity_tracker_;
+}
+::testing::Test <|-- ProcessorEntityTrackerTest
+class ProcessorEntityTest {
+    + return entity;
+    + return entity;
+    + base::Time ctime_;
+}
+::testing::Test <|-- ProcessorEntityTest
+class ProxyDataTypeControllerDelegate {
+    + const override;
+    - DelegateProvider delegate_provider_;
+}
+DataTypeControllerDelegate <|-- ProxyDataTypeControllerDelegate
+class StringOrdinal {
+}
+class LessThanFn {
+}
+class EqualsFn {
+}
+class SyncableService {
+    + visible immediately;
+}
+class LocalChangeProcessor {
+    + return processor_error;
+    + return std::nullopt;
+    - DataType type_;
+}
+SyncChangeProcessor <|-- LocalChangeProcessor
+class SyncableServiceBasedBridge {
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    + const override;
+    - DataType type_;
+    - InMemoryStore in_memory_store_;
+    - base::Time init_start_time_;
+}
+DataTypeSyncBridge <|-- SyncableServiceBasedBridge
+class MockSyncableService {
+}
+SyncableService <|-- MockSyncableService
+class SyncableServiceBasedBridgeTest {
+    # return std::nullopt;
+    # syncer::DataTypeActivationRequest request;
+    # return request;
+    # base::RunLoop loop;
+    # return storage_key_to_data;
+    # base::test::SingleThreadTaskEnvironment task_environment_;
+}
+::testing::Test <|-- SyncableServiceBasedBridgeTest
+class SyncChange {
+}
+class SyncChangeProcessor {
+}
+class SyncData {
+    + ClientTagHash client_tag_hash;
+    + std::string non_unique_name;
+    + sync_pb::EntitySpecifics specifics;
+}
+base::RefCountedThreadSafe <|-- SyncData
+class base {
+}
+class SyncData {
+    - struct InternalData;
+}
+class SyncMetadataStore {
+}
+class SyncMetadataStoreChangeList {
+    - metadata in;
+    - DataType type_;
+    - ErrorCallback error_callback_;
+}
+MetadataChangeList <|-- SyncMetadataStoreChangeList
+class TypeEntitiesCount {
+    + DataType type;
+}
+class WipeModelUponSyncDisabledBehavior {
+}
+@enduml

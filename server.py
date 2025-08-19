@@ -1,20 +1,20 @@
 from mcp.server.fastmcp import FastMCP
-from weather_fetcher import get_weather_internal
+from uml_generate import generate_cpp_uml_from_path
 
-mcp = FastMCP("Region Weather")
+mcp = FastMCP("UML Generator")
 
-@mcp.tool("get_weather")
-async def get_weather(region_name: str):
+@mcp.tool("generate_cpp_uml")
+async def generate_cpp_uml(path: str):
     """
-    MCP handler to get weather information for a specified region
-    
+    MCP handler to generate UML diagrams from C++ source files
+
     Args:
-        region_name (str): Name of the region to get weather for
-        
+        path (str): Path to the directory containing C++ source files
+
     Returns:
-        dict: Weather information for the specified region
+        str: PlantUML diagram as a string
     """
-    return get_weather_internal(region_name)
+    return generate_cpp_uml_from_path(path)
 
 if __name__ == "__main__":
     mcp.run()
