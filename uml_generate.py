@@ -114,6 +114,24 @@ def generate_plantuml(classes: List[Dict[str, Any]]) -> str:
     lines.append('@enduml')
     return '\n'.join(lines)
 
+def generate_cpp_uml_from_content(file_contents: Dict[str, str]) -> str:
+    """Generate PlantUML diagram from file contents dictionary.
+    
+    Args:
+        file_contents (Dict[str, str]): Dictionary where keys are file names and values are file contents
+        
+    Returns:
+        str: PlantUML diagram as a string
+    """
+    all_classes = []
+    for filename, content in file_contents.items():
+        try:
+            classes = parse_cpp_classes(content)
+            all_classes.extend(classes)
+        except Exception as e:
+            print(f'Error parsing {filename}: {e}')
+    return generate_plantuml(all_classes)
+
 def generate_cpp_uml_from_path(path: str) -> str:
     """Main entry: generate PlantUML diagram from all C++ files in a folder."""
     cpp_files = find_cpp_files(path)
