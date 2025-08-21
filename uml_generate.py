@@ -9,7 +9,7 @@ Usage (as a script):
     python uml_generate.py <folder_path>
     - The UML diagram will be written to 'uml_output.puml' in the current directory.
     - Example:
-        python uml_generate.py E:\Edge\src\components\sync\
+        python uml_generate.py E:\\Edge\\src\\components\\sync\\
 
 Usage (as a module):
     from uml_generate import generate_cpp_uml_from_path
