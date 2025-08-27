@@ -1,0 +1,35 @@
+[project]
+name = "uml-diagram-mcp-server"
+version = "0.1.0"
+description = "A Model Context Protocol (MCP) server that generates UML class diagrams from C++ source code"
+authors = [
+    {name = "hydavinci"}
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+keywords = ["mcp", "uml", "cpp", "plantuml", "diagram", "fastapi", "ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Documentation"
+]
+dependencies = [
+    "fastmcp>=0.2.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/hydavinci/uml-diagram"
+Repository = "https://github.com/hydavinci/uml-diagram"
+Issues = "https://github.com/hydavinci/uml-diagram/issues"
+
+[project.scripts]
+uml-diagram-mcp-server = "src.server:main"
